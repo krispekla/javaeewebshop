@@ -8,16 +8,26 @@ package com.krispeklaric.javaeewebshop.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kris
  */
 @Entity
+@Table(name = "\"order\"")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,15 +35,23 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_order;
 
-    private long user_id;
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime created;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(nullable = true)
+    @Enumerated(EnumType.ORDINAL)
     private PaymentType paymentType;
 
+    @Column(columnDefinition = "Money")
     private BigDecimal total;
+    
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private List<Order_Item> order_item;
+    
+    
     public BigDecimal getTotal() {
         return total;
     }
@@ -58,13 +76,14 @@ public class Order implements Serializable {
         this.created = created;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
+
 
     public Long getId() {
         return id_order;

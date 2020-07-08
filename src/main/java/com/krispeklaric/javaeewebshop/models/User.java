@@ -7,16 +7,22 @@ package com.krispeklaric.javaeewebshop.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kris
  */
 @Entity
+@Table(name = "\"user\"")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,8 +33,15 @@ public class User implements Serializable {
     private String lastName;
     private String email;
     private String password;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime created;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime modified;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Order> order;
 
     public LocalDateTime getModified() {
         return modified;
@@ -45,7 +58,7 @@ public class User implements Serializable {
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
- 
+
     public String getPassword() {
         return password;
     }
@@ -78,13 +91,20 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-
     public Long getId() {
         return id_user;
     }
 
     public void setId(Long id) {
         this.id_user = id;
+    }
+
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
     }
 
     @Override
@@ -111,5 +131,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.krispeklaric.javaeewebshop.models.User[ id=" + id_user + " ]";
     }
-    
+
 }

@@ -7,10 +7,14 @@ package com.krispeklaric.javaeewebshop.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -25,8 +29,23 @@ public class Category implements Serializable {
     private Long id_category;
 
     private String name;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime created;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime modified;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private List<Product> product;
+
+    public List<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Product> product) {
+        this.product = product;
+    }
 
     public LocalDateTime getModified() {
         return modified;

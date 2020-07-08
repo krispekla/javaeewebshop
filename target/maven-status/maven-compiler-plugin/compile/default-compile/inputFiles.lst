@@ -1,2 +1,8 @@
-C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\models\Test.java
-C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\utils\FactoryListener.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/models/Order_Item.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/utils/FactoryListener.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/models/Product.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/models/Order.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/models/PaymentType.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/models/User.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/models/User_Role.java
+/Users/pekla/Projects/javaeewebshop/src/main/java/com/krispeklaric/javaeewebshop/models/Category.java
