@@ -7,6 +7,8 @@ package com.krispeklaric.javaeewebshop.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,10 +30,8 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_user;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private Long idUser;
+    private String username;
     private String password;
 
     @Column(columnDefinition = "TIMESTAMP")
@@ -42,6 +42,11 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Order> order;
+
+    public User() {
+        created = LocalDateTime.now();
+        modified = LocalDateTime.now();
+    }
 
     public LocalDateTime getModified() {
         return modified;
@@ -67,36 +72,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Long getId() {
-        return id_user;
-    }
-
-    public void setId(Long id) {
-        this.id_user = id;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public List<Order> getOrder() {
@@ -110,7 +99,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_user != null ? id_user.hashCode() : 0);
+        hash += (idUser != null ? idUser.hashCode() : 0);
         return hash;
     }
 
@@ -121,7 +110,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.id_user == null && other.id_user != null) || (this.id_user != null && !this.id_user.equals(other.id_user))) {
+        if ((this.idUser == null && other.idUser != null) || (this.idUser != null && !this.idUser.equals(other.idUser))) {
             return false;
         }
         return true;
@@ -129,7 +118,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.User[ id=" + id_user + " ]";
+        return "com.krispeklaric.javaeewebshop.models.User[ id=" + idUser + " ]";
     }
 
 }

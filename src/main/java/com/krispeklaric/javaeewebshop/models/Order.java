@@ -33,7 +33,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_order;
+    private Long idOrder;
 
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime created;
@@ -43,15 +43,17 @@ public class Order implements Serializable {
 
     @Column(columnDefinition = "Money")
     private BigDecimal total;
-    
+
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private List<Order_Item> order_item;
-    
-    
+    private List<OrderItem> orderItem;
+
+    public Order() {
+    }
+
     public BigDecimal getTotal() {
         return total;
     }
@@ -84,19 +86,26 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-
-    public Long getId() {
-        return id_order;
+    public Long getIdOrder() {
+        return idOrder;
     }
 
-    public void setId(Long id) {
-        this.id_order = id;
+    public void setIdOrder(Long idOrder) {
+        this.idOrder = idOrder;
+    }
+
+    public List<OrderItem> getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(List<OrderItem> orderItem) {
+        this.orderItem = orderItem;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_order != null ? id_order.hashCode() : 0);
+        hash += (idOrder != null ? idOrder.hashCode() : 0);
         return hash;
     }
 
@@ -107,7 +116,7 @@ public class Order implements Serializable {
             return false;
         }
         Order other = (Order) object;
-        if ((this.id_order == null && other.id_order != null) || (this.id_order != null && !this.id_order.equals(other.id_order))) {
+        if ((this.idOrder == null && other.idOrder != null) || (this.idOrder != null && !this.idOrder.equals(other.idOrder))) {
             return false;
         }
         return true;
@@ -115,7 +124,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.Order[ id=" + id_order + " ]";
+        return "com.krispeklaric.javaeewebshop.models.Order[ id=" + idOrder + " ]";
     }
 
 }

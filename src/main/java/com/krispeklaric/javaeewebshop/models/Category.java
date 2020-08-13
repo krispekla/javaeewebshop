@@ -26,7 +26,7 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_category;
+    private Long idCategory;
 
     private String name;
 
@@ -38,6 +38,9 @@ public class Category implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Product> product;
+
+    public Category() {
+    }
 
     public List<Product> getProduct() {
         return product;
@@ -71,18 +74,18 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Long getId() {
-        return id_category;
+    public Long getIdCategory() {
+        return idCategory;
     }
 
-    public void setId(Long id) {
-        this.id_category = id;
+    public void setIdCategory(Long idCategory) {
+        this.idCategory = idCategory;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_category != null ? id_category.hashCode() : 0);
+        hash += (idCategory != null ? idCategory.hashCode() : 0);
         return hash;
     }
 
@@ -93,7 +96,7 @@ public class Category implements Serializable {
             return false;
         }
         Category other = (Category) object;
-        if ((this.id_category == null && other.id_category != null) || (this.id_category != null && !this.id_category.equals(other.id_category))) {
+        if ((this.idCategory == null && other.idCategory != null) || (this.idCategory != null && !this.idCategory.equals(other.idCategory))) {
             return false;
         }
         return true;
@@ -101,7 +104,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.Category[ id=" + id_category + " ]";
+        return "com.krispeklaric.javaeewebshop.models.Category[ id=" + idCategory + " ]";
     }
 
 }

@@ -1,6 +1,6 @@
 package com.krispeklaric.javaeewebshop.models;
 
-import com.krispeklaric.javaeewebshop.models.Order_Item;
+import com.krispeklaric.javaeewebshop.models.OrderItem;
 import com.krispeklaric.javaeewebshop.models.PaymentType;
 import com.krispeklaric.javaeewebshop.models.User;
 import java.math.BigDecimal;
@@ -10,13 +10,13 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-08T07:52:40")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-13T12:41:14")
 @StaticMetamodel(Order.class)
 public class Order_ { 
 
-    public static volatile SingularAttribute<Order, Long> id_order;
+    public static volatile SingularAttribute<Order, Long> idOrder;
     public static volatile SingularAttribute<Order, BigDecimal> total;
-    public static volatile ListAttribute<Order, Order_Item> order_item;
+    public static volatile ListAttribute<Order, OrderItem> orderItem;
     public static volatile SingularAttribute<Order, LocalDateTime> created;
     public static volatile SingularAttribute<Order, User> user;
     public static volatile SingularAttribute<Order, PaymentType> paymentType;

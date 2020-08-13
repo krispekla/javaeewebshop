@@ -20,12 +20,12 @@ import javax.persistence.OneToOne;
  * @author Kris
  */
 @Entity
-public class Order_Item implements Serializable {
+public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_orderItem;
+    private Long idOrderItem;
 
     private long quantity;
 
@@ -33,13 +33,16 @@ public class Order_Item implements Serializable {
     private BigDecimal price;
 
     @OneToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "orderId")
     private Order order;
-    
+
     @OneToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "productId")
     private Product product;
-    
+
+    public OrderItem() {
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -72,30 +75,29 @@ public class Order_Item implements Serializable {
         this.product = product;
     }
 
-
-    public Long getId() {
-        return id_orderItem;
+    public Long getIdOrderItem() {
+        return idOrderItem;
     }
 
-    public void setId(Long id) {
-        this.id_orderItem = id;
+    public void setIdOrderItem(Long idOrderItem) {
+        this.idOrderItem = idOrderItem;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_orderItem != null ? id_orderItem.hashCode() : 0);
+        hash += (idOrderItem != null ? idOrderItem.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order_Item)) {
+        if (!(object instanceof OrderItem)) {
             return false;
         }
-        Order_Item other = (Order_Item) object;
-        if ((this.id_orderItem == null && other.id_orderItem != null) || (this.id_orderItem != null && !this.id_orderItem.equals(other.id_orderItem))) {
+        OrderItem other = (OrderItem) object;
+        if ((this.idOrderItem == null && other.idOrderItem != null) || (this.idOrderItem != null && !this.idOrderItem.equals(other.idOrderItem))) {
             return false;
         }
         return true;
@@ -103,7 +105,6 @@ public class Order_Item implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.OrderItem[ id=" + id_orderItem + " ]";
+        return "com.krispeklaric.javaeewebshop.models.OrderItem[ id=" + idOrderItem + " ]";
     }
-
 }

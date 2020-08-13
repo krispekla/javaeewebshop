@@ -2,12 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.krispeklaric_javaeewebshop_war_1.0PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.krispeklaric.javaeewebshop.utils.LocalDateAttributeConverter</class>
+    <class>com.krispeklaric.javaeewebshop.utils.LocalDateTimeAttributeConverter</class>
     <class>com.krispeklaric.javaeewebshop.models.Category</class>
     <class>com.krispeklaric.javaeewebshop.models.Order</class>
     <class>com.krispeklaric.javaeewebshop.models.Order_Item</class>
     <class>com.krispeklaric.javaeewebshop.models.Product</class>
     <class>com.krispeklaric.javaeewebshop.models.User</class>
     <class>com.krispeklaric.javaeewebshop.models.User_Role</class>
+    <class>com.krispeklaric.javaeewebshop.models.UserRole</class>
+    <class>com.krispeklaric.javaeewebshop.models.OrderItem</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/javaee"/>
@@ -15,6 +19,7 @@
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="postgres"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="eclipselink.target-database" value="Auto"/>
     </properties>
   </persistence-unit>
 </persistence>

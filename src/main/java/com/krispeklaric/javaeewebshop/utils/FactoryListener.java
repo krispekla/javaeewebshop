@@ -32,4 +32,14 @@ public class FactoryListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         entityManagerFactory.close();
     }
+
+    public static EntityManagerFactory getOrCreateEntityManagerFactory() {
+
+        if (entityManagerFactory == null) {
+            entityManagerFactory = Persistence.createEntityManagerFactory("com.krispeklaric_javaeewebshop_war_1.0PU");
+            return entityManagerFactory;
+        }
+
+        return entityManagerFactory;
+    }
 }

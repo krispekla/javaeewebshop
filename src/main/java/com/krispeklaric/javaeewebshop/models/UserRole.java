@@ -16,56 +16,59 @@ import javax.persistence.Id;
  * @author Kris
  */
 @Entity
-public class User_Role implements Serializable {
+public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_user_role;
+    private Long idUserRole;
 
-    private String role_name;
+    private String name;
 
-    private String email;
+    private String username;
 
-    public String getRole_name() {
-        return role_name;
+    public UserRole() {
     }
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public Long getIdUserRole() {
+        return idUserRole;
     }
 
-    public String getEmail() {
-        return email;
+    public void setIdUserRole(Long idUserRole) {
+        this.idUserRole = idUserRole;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getName() {
+        return name;
     }
 
-    public Long getId() {
-        return id_user_role;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setId(Long id) {
-        this.id_user_role = id;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_user_role != null ? id_user_role.hashCode() : 0);
+        hash += (idUserRole != null ? idUserRole.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User_Role)) {
+        if (!(object instanceof UserRole)) {
             return false;
         }
-        User_Role other = (User_Role) object;
-        if ((this.id_user_role == null && other.id_user_role != null) || (this.id_user_role != null && !this.id_user_role.equals(other.id_user_role))) {
+        UserRole other = (UserRole) object;
+        if ((this.idUserRole == null && other.idUserRole != null) || (this.idUserRole != null && !this.idUserRole.equals(other.idUserRole))) {
             return false;
         }
         return true;
@@ -73,7 +76,7 @@ public class User_Role implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.User_Role[ id=" + id_user_role + " ]";
+        return "com.krispeklaric.javaeewebshop.models.UserRole[ id=" + idUserRole + " ]";
     }
 
 }
