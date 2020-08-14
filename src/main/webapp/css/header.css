@@ -1,0 +1,42 @@
+header a {
+    color: #fff !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+}
+
+.header-logo  h1{
+    color: #fff;
+}
+.header-cart {
+    display: grid;
+    place-items: center;
+}
+.cart {
+    position:relative;
+    width: 81px;
+    display: flex;
+    justify-content: center;
+    background: rgba(248, 248, 248, 0.94);
+    box-shadow: 0px 4px 50px 1px rgba(255, 255, 255, 0.25);
+    border-radius: 21px;
+    cursor: pointer;
+}
+.cart img {
+    width: 32px;
+    height: 32px;
+}
+.cart-notification {
+    border-radius: 50%;
+    background: #ED3939;
+    border: 1px solid #383838;
+    color: white;
+    font-size:13px;
+    position: absolute;
+    display: grid;
+    place-items:center;
+    width: 26px;
+    height: 26px;
+    left: 58px;
+    top: -10px;
+}

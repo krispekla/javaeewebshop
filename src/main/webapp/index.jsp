@@ -7,38 +7,35 @@
 <%@page import="java.util.List"%>
 <%@page import="com.krispeklaric.javaeewebshop.models.Category"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Java web shop</title>
-    </head>
-    <body>
-    <td>${ requestScope.cat1}</td> 
-    <h1>Hello World! ${requestScope.categories}</h1>
+<link rel="stylesheet" href="css/index.css" type="text/css">
+<t:layout>
 
-    <div class="d-flex flex-row">
+    <div class="container jumbotron mt-3">
+        <h2 class="text-center font-weight-light">Find perfect mobile for you or your loved ones</h2>
+    </div>
+    <div class="container mx-auto mt-3">
+        <h3 class="ml-2 my-3">Category</h3>
+        <div class="index-categories  d-flex flex-wrap">
 
-        <%
-            List<Category> list = (List) request.getAttribute("categories");
-        %> 
-
-        <%
-            for (Category u : list) {
-        %> 
-        <div class="text-center">
-            <p><%=u.getName()%></p> 
-            <img class="img-fluid" src="<%=u.getLogoUrl()%>" />
+            <c:forEach items="${categories}" var="category">
+                <div class="category-item my-3">
+                    <a href="products?category=${category.getName()}">
+                        
+                    <div class="category-item-wrapper hvr-float hvr-float shadow">
+                        <h4>
+                            ${fn:toUpperCase(fn:substring(category.getName(), 0, 1))}${fn:toLowerCase(fn:substring(category.getName(), 1,fn:length(category.getName())))}
+                        </h4>
+                        <img src="${category.getLogoUrl()}" />
+                    </div>
+                    </a>
+                </div>
+            </c:forEach>
         </div>
-        <%
-            }
-        %> 
     </div>
-    <div>
-        <h2>Pozdrav</h2>
-        <jsp:useBean id="cat1" class="com.krispeklaric.javaeewebshop.models.Category" scope="request" />
-        <jsp:getProperty name="cat1" property="name" />
-    </div>
-</body>
-</html>
+
+</t:layout>
+

@@ -8,6 +8,7 @@ package com.krispeklaric.javaeewebshop.repositories;
 import com.krispeklaric.javaeewebshop.models.Category;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -34,6 +35,21 @@ public class CategoryRepository extends BaseRepository {
             CriteriaQuery<Category> all = cq.select(rootEntry);
             TypedQuery<Category> allQuery = em.createQuery(all);
             return allQuery.getResultList();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public Category get(String category) {
+        EntityManager em = null;
+
+        try {
+            em = getEntityManager();
+           Query q =  em.createQuery("SELECT c FROM Category c WHERE c.name = :category");
+           q.setParameter("category", category);
+           return (Category)q.getSingleResult();   
         } finally {
             if (em != null) {
                 em.close();

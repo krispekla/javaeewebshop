@@ -6,6 +6,7 @@
 package com.krispeklaric.javaeewebshop.services.interfaces;
 
 import com.krispeklaric.javaeewebshop.models.Category;
+import com.krispeklaric.javaeewebshop.models.Product;
 import java.util.List;
 
 /**
@@ -15,5 +16,6 @@ import java.util.List;
 public interface IProductService {
 
     List<Category> getAllCategory();
+    List<Product> getProduct(String category);
 
 }

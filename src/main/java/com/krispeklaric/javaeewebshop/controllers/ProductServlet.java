@@ -5,7 +5,11 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
+import com.krispeklaric.javaeewebshop.models.Product;
+import com.krispeklaric.javaeewebshop.services.ProductService;
+import com.krispeklaric.javaeewebshop.services.interfaces.IProductService;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Kris
+ * @author pekla
  */
-public class IndexServlet extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,9 +33,16 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String category = request.getParameter("category");
 
-
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        IProductService productService = new ProductService();
+        List<Product> products = productService.getProduct(category);
+        request.setAttribute("products", products);
+//        request.setAttribute("category", category);
+        
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-overview.jsp");
         dispatcher.forward(request, response);
     }
 
