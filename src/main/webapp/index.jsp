@@ -16,24 +16,25 @@
     </head>
     <body>
     <td>${ requestScope.cat1}</td> 
-        <h1>Hello World! ${requestScope.categories}</h1>
+    <h1>Hello World! ${requestScope.categories}</h1>
 
+    <div class="d-flex flex-row">
 
-    <%
-        int i = 1;
-        List<Category> list = (List) request.getAttribute("categories");
-    %> 
+        <%
+            List<Category> list = (List) request.getAttribute("categories");
+        %> 
 
-    <%
-        for (Category u : list) {
-    %> 
-    <tr> 
-        <td><%=i++%></td> 
-        <td><%=u.getName()%></td> 
-    </tr> 
-    <%
-        }
-    %> 
+        <%
+            for (Category u : list) {
+        %> 
+        <div class="text-center">
+            <p><%=u.getName()%></p> 
+            <img class="img-fluid" src="<%=u.getLogoUrl()%>" />
+        </div>
+        <%
+            }
+        %> 
+    </div>
     <div>
         <h2>Pozdrav</h2>
         <jsp:useBean id="cat1" class="com.krispeklaric.javaeewebshop.models.Category" scope="request" />

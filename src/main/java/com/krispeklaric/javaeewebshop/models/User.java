@@ -30,7 +30,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idUser;
+    private Long id_user;
     private String username;
     private String password;
 
@@ -80,12 +80,12 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getId_user() {
+        return id_user;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setId_user(Long id_user) {
+        this.id_user = id_user;
     }
 
     public List<Order> getOrder() {
@@ -99,7 +99,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUser != null ? idUser.hashCode() : 0);
+        hash += (id_user != null ? id_user.hashCode() : 0);
         return hash;
     }
 
@@ -110,7 +110,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.idUser == null && other.idUser != null) || (this.idUser != null && !this.idUser.equals(other.idUser))) {
+        if ((this.id_user == null && other.id_user != null) || (this.id_user != null && !this.id_user.equals(other.id_user))) {
             return false;
         }
         return true;
@@ -118,7 +118,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.User[ id=" + idUser + " ]";
+        return "com.krispeklaric.javaeewebshop.models.User[ id=" + id_user + " ]";
     }
 
 }

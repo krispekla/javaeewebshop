@@ -26,9 +26,11 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idCategory;
+    private Long id_category;
 
     private String name;
+
+    private String logoUrl;
 
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime created;
@@ -74,18 +76,26 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Long getIdCategory() {
-        return idCategory;
+    public Long getId_category() {
+        return id_category;
     }
 
-    public void setIdCategory(Long idCategory) {
-        this.idCategory = idCategory;
+    public void setId_category(Long id_category) {
+        this.id_category = id_category;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCategory != null ? idCategory.hashCode() : 0);
+        hash += (id_category != null ? id_category.hashCode() : 0);
         return hash;
     }
 
@@ -96,7 +106,7 @@ public class Category implements Serializable {
             return false;
         }
         Category other = (Category) object;
-        if ((this.idCategory == null && other.idCategory != null) || (this.idCategory != null && !this.idCategory.equals(other.idCategory))) {
+        if ((this.id_category == null && other.id_category != null) || (this.id_category != null && !this.id_category.equals(other.id_category))) {
             return false;
         }
         return true;
@@ -104,7 +114,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.Category[ id=" + idCategory + " ]";
+        return "com.krispeklaric.javaeewebshop.models.Category[ id=" + id_category + " ]";
     }
 
 }

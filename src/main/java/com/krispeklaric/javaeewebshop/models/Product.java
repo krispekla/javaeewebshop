@@ -29,7 +29,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idProduct;
+    private Long id_product;
 
     private String name;
 
@@ -39,11 +39,13 @@ public class Product implements Serializable {
 
     private String manufacturer;
 
+    private String imgUrl;
+
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime date;
 
     @OneToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
@@ -80,12 +82,12 @@ public class Product implements Serializable {
         return manufacturer;
     }
 
-    public Long getIdProduct() {
-        return idProduct;
+    public Long getId_product() {
+        return id_product;
     }
 
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
+    public void setId_product(Long id_product) {
+        this.id_product = id_product;
     }
 
     public void setManufacturer(String manufacturer) {
@@ -116,10 +118,18 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idProduct != null ? idProduct.hashCode() : 0);
+        hash += (id_product != null ? id_product.hashCode() : 0);
         return hash;
     }
 
@@ -130,7 +140,7 @@ public class Product implements Serializable {
             return false;
         }
         Product other = (Product) object;
-        if ((this.idProduct == null && other.idProduct != null) || (this.idProduct != null && !this.idProduct.equals(other.idProduct))) {
+        if ((this.id_product == null && other.id_product != null) || (this.id_product != null && !this.id_product.equals(other.id_product))) {
             return false;
         }
         return true;
@@ -138,7 +148,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.Product[ id=" + idProduct + " ]";
+        return "com.krispeklaric.javaeewebshop.models.Product[ id=" + id_product + " ]";
     }
 
 }

@@ -14,18 +14,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kris
  */
 @Entity
+@Table(name = "order_item")
 public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idOrderItem;
+    private Long id_order_item;
 
     private long quantity;
 
@@ -33,11 +35,11 @@ public class OrderItem implements Serializable {
     private BigDecimal price;
 
     @OneToOne
-    @JoinColumn(name = "orderId")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @OneToOne
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public OrderItem() {
@@ -75,18 +77,20 @@ public class OrderItem implements Serializable {
         this.product = product;
     }
 
-    public Long getIdOrderItem() {
-        return idOrderItem;
+    public Long getId_order_item() {
+        return id_order_item;
     }
 
-    public void setIdOrderItem(Long idOrderItem) {
-        this.idOrderItem = idOrderItem;
+    public void setId_order_item(Long id_order_item) {
+        this.id_order_item = id_order_item;
     }
+
+ 
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idOrderItem != null ? idOrderItem.hashCode() : 0);
+        hash += (id_order_item != null ? id_order_item.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +101,7 @@ public class OrderItem implements Serializable {
             return false;
         }
         OrderItem other = (OrderItem) object;
-        if ((this.idOrderItem == null && other.idOrderItem != null) || (this.idOrderItem != null && !this.idOrderItem.equals(other.idOrderItem))) {
+        if ((this.id_order_item == null && other.id_order_item != null) || (this.id_order_item != null && !this.id_order_item.equals(other.id_order_item))) {
             return false;
         }
         return true;
@@ -105,6 +109,6 @@ public class OrderItem implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.OrderItem[ id=" + idOrderItem + " ]";
+        return "com.krispeklaric.javaeewebshop.models.OrderItem[ id=" + id_order_item + " ]";
     }
 }

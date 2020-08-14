@@ -10,18 +10,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kris
  */
 @Entity
+@Table(name = "\"user_role\"")
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idUserRole;
+    private Long id_user_role;
 
     private String name;
 
@@ -30,12 +32,12 @@ public class UserRole implements Serializable {
     public UserRole() {
     }
 
-    public Long getIdUserRole() {
-        return idUserRole;
+    public Long getId_user_role() {
+        return id_user_role;
     }
 
-    public void setIdUserRole(Long idUserRole) {
-        this.idUserRole = idUserRole;
+    public void setId_user_role(Long id_user_role) {
+        this.id_user_role = id_user_role;
     }
 
     public String getName() {
@@ -57,7 +59,7 @@ public class UserRole implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUserRole != null ? idUserRole.hashCode() : 0);
+        hash += (id_user_role != null ? id_user_role.hashCode() : 0);
         return hash;
     }
 
@@ -68,7 +70,7 @@ public class UserRole implements Serializable {
             return false;
         }
         UserRole other = (UserRole) object;
-        if ((this.idUserRole == null && other.idUserRole != null) || (this.idUserRole != null && !this.idUserRole.equals(other.idUserRole))) {
+        if ((this.id_user_role == null && other.id_user_role != null) || (this.id_user_role != null && !this.id_user_role.equals(other.id_user_role))) {
             return false;
         }
         return true;
@@ -76,7 +78,7 @@ public class UserRole implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.UserRole[ id=" + idUserRole + " ]";
+        return "com.krispeklaric.javaeewebshop.models.UserRole[ id=" + id_user_role + " ]";
     }
 
 }

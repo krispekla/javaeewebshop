@@ -33,19 +33,19 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idOrder;
+    private Long id_order;
 
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime created;
 
     @Enumerated(EnumType.ORDINAL)
-    private PaymentType paymentType;
+    private PaymentType payment_type;
 
     @Column(columnDefinition = "Money")
     private BigDecimal total;
 
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
@@ -62,12 +62,12 @@ public class Order implements Serializable {
         this.total = total;
     }
 
-    public PaymentType getPaymentType() {
-        return paymentType;
+    public PaymentType getPayment_type() {
+        return payment_type;
     }
 
-    public void setPaymentType(PaymentType paymentType) {
-        this.paymentType = paymentType;
+    public void setPayment_type(PaymentType payment_type) {
+        this.payment_type = payment_type;
     }
 
     public LocalDateTime getCreated() {
@@ -86,12 +86,12 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    public Long getIdOrder() {
-        return idOrder;
+    public Long getId_order() {
+        return id_order;
     }
 
-    public void setIdOrder(Long idOrder) {
-        this.idOrder = idOrder;
+    public void setId_order(Long id_order) {
+        this.id_order = id_order;
     }
 
     public List<OrderItem> getOrderItem() {
@@ -105,7 +105,7 @@ public class Order implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idOrder != null ? idOrder.hashCode() : 0);
+        hash += (id_order != null ? id_order.hashCode() : 0);
         return hash;
     }
 
@@ -116,7 +116,7 @@ public class Order implements Serializable {
             return false;
         }
         Order other = (Order) object;
-        if ((this.idOrder == null && other.idOrder != null) || (this.idOrder != null && !this.idOrder.equals(other.idOrder))) {
+        if ((this.id_order == null && other.id_order != null) || (this.id_order != null && !this.id_order.equals(other.id_order))) {
             return false;
         }
         return true;
@@ -124,7 +124,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "com.krispeklaric.javaeewebshop.models.Order[ id=" + idOrder + " ]";
+        return "com.krispeklaric.javaeewebshop.models.Order[ id=" + id_order + " ]";
     }
 
 }
