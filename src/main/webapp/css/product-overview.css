@@ -43,3 +43,6 @@
     width: 200px;
     background: rgba(240, 240, 240, 0.103);
 }
+.product-modal img {
+    height: 200px;
+}

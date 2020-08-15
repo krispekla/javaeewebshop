@@ -7,6 +7,7 @@ package com.krispeklaric.javaeewebshop.dtos;
 
 import com.krispeklaric.javaeewebshop.models.OrderItem;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,5 +54,21 @@ public class CartDTO implements Serializable {
         }
 
         items.add(item);
+    }
+
+    public BigDecimal calculateTotalPrice() {
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        BigDecimal temp = BigDecimal.ZERO;
+        if (items == null) {
+            return totalPrice;
+        }
+
+        for (OrderItem item : items) {
+            if (item.getQuantity() != 0) {
+                temp = item.getPrice().multiply(new BigDecimal(item.getQuantity()));
+            }
+            totalPrice = totalPrice.add(temp);
+        }
+        return totalPrice;
     }
 }

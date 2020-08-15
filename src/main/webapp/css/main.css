@@ -88,3 +88,21 @@ h1, h2, h3, h4, h5, h6 {
 .btn-dark:hover {
     background: black;
 }
+
+@keyframes contentSlide {
+    0% {
+        transform: translateY(1%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+
+    }
+}
+
+
+.content {
+    animation: 0.5s ease-out 0s 1 contentSlide;
+}
+
