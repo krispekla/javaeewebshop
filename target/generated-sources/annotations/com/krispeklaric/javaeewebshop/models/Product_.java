@@ -9,15 +9,16 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-13T12:41:14")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-15T14:14:36")
 @StaticMetamodel(Product.class)
 public class Product_ { 
 
+    public static volatile SingularAttribute<Product, String> imgUrl;
     public static volatile SingularAttribute<Product, LocalDateTime> date;
+    public static volatile SingularAttribute<Product, Long> id_product;
     public static volatile ListAttribute<Product, OrderItem> orderItem;
     public static volatile SingularAttribute<Product, BigDecimal> price;
     public static volatile SingularAttribute<Product, String> name;
-    public static volatile SingularAttribute<Product, Long> idProduct;
     public static volatile SingularAttribute<Product, String> description;
     public static volatile SingularAttribute<Product, Category> category;
     public static volatile SingularAttribute<Product, String> manufacturer;

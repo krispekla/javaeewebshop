@@ -6,10 +6,12 @@
 package com.krispeklaric.javaeewebshop.services;
 
 import com.krispeklaric.javaeewebshop.models.Category;
+import com.krispeklaric.javaeewebshop.models.OrderItem;
 import com.krispeklaric.javaeewebshop.models.Product;
 import com.krispeklaric.javaeewebshop.repositories.CategoryRepository;
 import com.krispeklaric.javaeewebshop.repositories.ProductRepository;
 import com.krispeklaric.javaeewebshop.services.interfaces.IProductService;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -35,6 +37,22 @@ public class ProductService implements IProductService {
     public List<Product> getProduct(String category) {
         Category categoryResult = _categoryRepository.get(category);
         return _productRepository.getAll(categoryResult);
+    }
+
+    @Override
+    public OrderItem get(int productId, int quantity) {
+        Product product = _productRepository.get(Long.valueOf(productId));
+
+        if (product == null) {
+            return null;
+        }
+        
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setQuantity(quantity);
+        orderItem.setPrice(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
+
+        return orderItem;
     }
 
 }

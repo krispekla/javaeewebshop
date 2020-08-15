@@ -8,9 +8,17 @@
         <description>ServletContextListener</description>
         <listener-class>com.krispeklaric.javaeewebshop.utils.FactoryListener</listener-class>
     </listener>
+    <listener>
+        <description>HttpSessionListener</description>
+        <listener-class>com.krispeklaric.javaeewebshop.utils.SessionListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>com.krispeklaric.javaeewebshop.controllers.ProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -27,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/products</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="css/index.css" type="text/css">
 <t:layout>
 
-    <div class="container jumbotron mt-3">
+    <div class="container jumbotron mt-5">
         <h2 class="text-center font-weight-light">Find perfect mobile for you or your loved ones</h2>
     </div>
     <div class="container mx-auto mt-3">

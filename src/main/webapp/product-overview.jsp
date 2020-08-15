@@ -19,27 +19,33 @@
         <div class="d-flex flex-wrap">
 
             <c:forEach items="${products}" var="product">
+
                 <div class="product-item my-3">
 
                     <div class="product-item-wrapper hvr-float hvr-float shadow">
-                        <h4>
-                            ${fn:toUpperCase(product.getName())}
-                        </h4>
+                        <h4 class="text-nowrap">${fn:toUpperCase(product.getName())}</h4>
                         <img src="${product.getImgUrl()}" />
                         <div class="product-item-commands">
 
                             <div class="d-flex flex-row justify-content-center align-items-center mb-3">
-                                <button class="btn btn-light">-</button>
-                                <span class="mx-3">0</span>
-                                <button class="btn btn-light">+</button>
+                                <h6 class="my-auto">Price:</h6>
+                                <p class="mx-3 my-auto font-weight-light">${product.getPrice()}$</p>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center align-items-center mb-3">
+                                <button class="btn btn-light" onclick="productCountHandler('${product.getManufacturer()}_${product.getId_product()}', false)">-</button>
+                                <span id="${product.getManufacturer()}_${product.getId_product()}" class="mx-3"></span>
+                                <button  class="btn btn-light" onclick="productCountHandler('${product.getManufacturer()}_${product.getId_product()}')">+</button>
                             </div>
                             <div class="d-flex flex-row justify-content-around mt-3 ">
                                 <button class="btn btn-light">details</button>
-                                <button class="btn btn-dark text-center">Add to cart</button>
+                                <button class="btn btn-dark text-center" onclick="addToCart('${product.getManufacturer()}_${product.getId_product()}',${product.getId_product()})">Add to cart</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <script type="text/javascript">
+                    document.getElementById('${product.getManufacturer()}_${product.getId_product()}').innerHTML = 1;
+                </script>
             </c:forEach>
         </div>
     </section>

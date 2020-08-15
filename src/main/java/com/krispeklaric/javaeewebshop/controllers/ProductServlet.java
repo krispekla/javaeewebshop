@@ -5,9 +5,14 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
+import com.google.gson.Gson;
+import com.krispeklaric.javaeewebshop.dtos.CartDTO;
+import com.krispeklaric.javaeewebshop.dtos.ProductDTO;
+import com.krispeklaric.javaeewebshop.models.OrderItem;
 import com.krispeklaric.javaeewebshop.models.Product;
 import com.krispeklaric.javaeewebshop.services.ProductService;
 import com.krispeklaric.javaeewebshop.services.interfaces.IProductService;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -15,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,8 +46,7 @@ public class ProductServlet extends HttpServlet {
         List<Product> products = productService.getProduct(category);
         request.setAttribute("products", products);
 //        request.setAttribute("category", category);
-        
-        
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-overview.jsp");
         dispatcher.forward(request, response);
     }
@@ -72,7 +77,29 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        final StringBuilder sb = new StringBuilder();
+        try (final BufferedReader br = request.getReader();) {
+            String line = null;
+            while (null != (line = br.readLine())) {
+                sb.append(line);
+            }
+        }
+        Gson gson = new Gson();
+        ProductDTO product = gson.fromJson(sb.toString(), ProductDTO.class);
+
+        HttpSession session = request.getSession();
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+
+        ProductService productService = new ProductService();
+        OrderItem item = productService.get(product.getId(), product.getQuantity());
+        
+        cart.addOrUpdateItem(item);
+
+        session.setAttribute("cart", cart);
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        
     }
 
     /**

@@ -10,15 +10,15 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-13T12:41:14")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-15T14:14:36")
 @StaticMetamodel(Order.class)
 public class Order_ { 
 
-    public static volatile SingularAttribute<Order, Long> idOrder;
+    public static volatile SingularAttribute<Order, Long> id_order;
+    public static volatile SingularAttribute<Order, PaymentType> payment_type;
     public static volatile SingularAttribute<Order, BigDecimal> total;
     public static volatile ListAttribute<Order, OrderItem> orderItem;
     public static volatile SingularAttribute<Order, LocalDateTime> created;
     public static volatile SingularAttribute<Order, User> user;
-    public static volatile SingularAttribute<Order, PaymentType> paymentType;
 
 }

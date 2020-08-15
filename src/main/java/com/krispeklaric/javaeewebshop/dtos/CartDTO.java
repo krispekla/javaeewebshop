@@ -7,6 +7,7 @@ package com.krispeklaric.javaeewebshop.dtos;
 
 import com.krispeklaric.javaeewebshop.models.OrderItem;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,5 +36,22 @@ public class CartDTO implements Serializable {
             quantity += item.getQuantity();
         }
         return quantity;
+    }
+
+    public void addOrUpdateItem(OrderItem item) {
+        if (items == null) {
+            items = new ArrayList<OrderItem>();
+            items.add(item);
+            return;
+        }
+
+        for (OrderItem ordItem : items) {
+            if (ordItem.getProduct().equals(item.getProduct())) {
+                ordItem.setQuantity(item.getQuantity() + ordItem.getQuantity());
+                return;
+            }
+        }
+
+        items.add(item);
     }
 }

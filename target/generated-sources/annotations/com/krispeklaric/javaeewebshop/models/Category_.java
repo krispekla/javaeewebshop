@@ -7,14 +7,15 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-13T12:41:14")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-15T14:14:36")
 @StaticMetamodel(Category.class)
 public class Category_ { 
 
     public static volatile ListAttribute<Category, Product> product;
     public static volatile SingularAttribute<Category, LocalDateTime> created;
+    public static volatile SingularAttribute<Category, Long> id_category;
     public static volatile SingularAttribute<Category, String> name;
     public static volatile SingularAttribute<Category, LocalDateTime> modified;
-    public static volatile SingularAttribute<Category, Long> idCategory;
+    public static volatile SingularAttribute<Category, String> logoUrl;
 
 }

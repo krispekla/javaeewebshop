@@ -37,4 +37,18 @@ public class ProductRepository extends BaseRepository {
         }
     }
 
+    public Product get(long id) {
+        EntityManager em = null;
+
+        try {
+            em = getEntityManager();
+            Query q = em.createQuery("SELECT p FROM Product p WHERE p.id_product = :id_product");
+            q.setParameter("id_product", id);
+            return (Product) q.getSingleResult();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 }

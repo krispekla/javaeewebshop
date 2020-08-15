@@ -7,10 +7,10 @@
 <%@tag description="header" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
-<header class="header d-flex align-items-center">
+<header class="header d-flex align-items-center shadow sticky-top">
     <div class="header-logo d-flex ml-5 mr-auto">
         <%@include file="../../assets/mobile.svg" %>
-        <h1 class="ml-3">MOBILE 4U</h1>
+        <a href="index.jsp"><h1 class="ml-3">MOBILE 4U</h1></a>
     </div>
     <c:choose>
         <c:when test="${isAuthenticated == true}">
@@ -26,7 +26,7 @@
 
             <img  src="./assets/cart.png" />
             <div class="cart-notification">
-                <span>0</span>
+                <span>${cart.getNumberOfItems()}</span>
             </div>
         </div>
     </div>
