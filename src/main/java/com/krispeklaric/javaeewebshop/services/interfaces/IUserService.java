@@ -5,10 +5,15 @@
  */
 package com.krispeklaric.javaeewebshop.services.interfaces;
 
+import com.krispeklaric.javaeewebshop.models.User;
+
 /**
  *
  * @author Kris
  */
 public interface IUserService {
-    
+
+    User login(String username, String password);
+    User register(User user);
+    boolean checkIfUsernameIsAvailable(String username);
 }

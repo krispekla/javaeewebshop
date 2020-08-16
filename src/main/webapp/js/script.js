@@ -15,7 +15,7 @@ function productCountHandler(elementId, increase = true) {
 }
 
 // Notiflix Notify - All Options
-Notiflix.Notify.Init({position: 'right-top', width: '300px', fontSize: '17px', distance: '95px', });
+Notiflix.Notify.Init({position: 'right-top', width: '300px', fontSize: '17px', distance: '95px', timeout: 1800});
 
 function addToCart(elementId, productId) {
     let productQuantity = parseInt(document.getElementById(elementId).innerHTML);
