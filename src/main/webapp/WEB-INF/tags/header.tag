@@ -6,6 +6,7 @@
 
 <%@tag description="header" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
     #tooltip {
@@ -32,7 +33,11 @@
     </div>
     <c:choose>
         <c:when test="${isAuthenticated == true}">
-
+            <div class="d-flex justify-content-center align-items-center mr-4">
+                <span class="text-white">welcome ${user.getUsername()}, 
+                    <a href="login?logout=true" class="text-primary mx-2" href="login.jsp">logout</a>
+                </span>
+            </div>
         </c:when>    
         <c:otherwise>
             <a class="mr-4" href="login.jsp">login</a>
@@ -63,7 +68,7 @@
     </div>
 
 
-    <div id="dada" aria-describedby="tooltip" class="header-cart hvr-float">
+    <div id="headercart" aria-describedby="tooltip" class="header-cart hvr-float">
 
         <div class="cart p-1 mr-4">
 
@@ -76,7 +81,7 @@
     </div>
 
     <script>
-        const button = document.querySelector('#dada');
+        const button = document.querySelector('#headercart');
         const tooltip = document.querySelector('#tooltip');
 
         // Pass the button, the tooltip, and some options, and Popper will do the

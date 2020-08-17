@@ -6,15 +6,16 @@
 package com.krispeklaric.javaeewebshop.controllers;
 
 import com.krispeklaric.javaeewebshop.models.User;
+import com.krispeklaric.javaeewebshop.models.UserRole;
 import com.krispeklaric.javaeewebshop.services.UserService;
 import com.krispeklaric.javaeewebshop.services.interfaces.IUserService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,7 +49,20 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String logout = request.getParameter("logout");
+        if (!logout.isEmpty()) {
+            HttpSession session = request.getSession();
+
+            session.setAttribute("user", null);
+            session.setAttribute("role",null);
+            session.setAttribute("isAuthenticated", false);
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
+        } else {
+
+            processRequest(request, response);
+        }
     }
 
     /**
@@ -68,15 +82,34 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         if (username.isEmpty() || password.isEmpty()) {
-            request.setAttribute("invalidLogin", "invalid login");
+            request.setAttribute("invalidLogin", "Username and password cannot be empty");
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            isInvalid = true;
+        }
+
+        IUserService userService = new UserService();
+        User result = userService.login(username, password);
+        if (result == null) {
+            request.setAttribute("invalidLogin", "Wrong username or password");
+            isInvalid = true;
         }
 
         if (isInvalid) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
+        } else {
+            UserRole userRole = userService.getUserRole(result);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", result);
+            session.setAttribute("role", userRole.getName());
+            session.setAttribute("isAuthenticated", true);
+
+            request.setAttribute("status", "200");
+            request.setAttribute("message", "Sucesfully logged in");
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
+
         }
     }
 

@@ -6,6 +6,7 @@
 package com.krispeklaric.javaeewebshop.services.interfaces;
 
 import com.krispeklaric.javaeewebshop.models.User;
+import com.krispeklaric.javaeewebshop.models.UserRole;
 
 /**
  *
@@ -14,6 +15,13 @@ import com.krispeklaric.javaeewebshop.models.User;
 public interface IUserService {
 
     User login(String username, String password);
+
     User register(User user);
+
     boolean checkIfUsernameIsAvailable(String username);
+
+    boolean checkIfEmailIsAvailable(String email);
+
+    UserRole getUserRole(User user);
+
 }

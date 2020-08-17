@@ -27,7 +27,6 @@ public class ProductRepository extends BaseRepository {
         try {
             em = getEntityManager();
             Query q = em.createQuery("SELECT p FROM Product p WHERE p.category = :categoryid");
-            long id = category.getId_category();
             q.setParameter("categoryid", category);
             return (List<Product>) q.getResultList();
         } finally {

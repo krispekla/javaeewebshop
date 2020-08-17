@@ -24,7 +24,7 @@
                 <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
             </div>
             <c:if test="${not empty invalidLogin}">
-                <large id="emailHelp" class="form-text text-danger">Invalid login, try again!</large>
+                <large id="emailHelp" class="form-text text-danger">${invalidLogin}</large>
                 </c:if>
             <button type="submit" class="btn btn-dark  mx-auto mt-4 px-5">Login</button>
         </form>

@@ -45,7 +45,6 @@ public class ProductServlet extends HttpServlet {
         IProductService productService = new ProductService();
         List<Product> products = productService.getProduct(category);
         request.setAttribute("products", products);
-//        request.setAttribute("category", category);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-overview.jsp");
         dispatcher.forward(request, response);

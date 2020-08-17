@@ -5,13 +5,13 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
+import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.services.UserService;
 import com.krispeklaric.javaeewebshop.services.interfaces.IUserService;
 import com.krispeklaric.javaeewebshop.utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,19 +35,7 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,8 +64,11 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         IUserService userService = new UserService();
         boolean isInvalid = false;
+        User user = new User();
+
 //        Params
         String username = request.getParameter("username");
         String firstname = request.getParameter("firstname");
@@ -88,9 +79,11 @@ public class RegisterServlet extends HttpServlet {
 //        Validations
         if (!firstname.isEmpty()) {
             request.setAttribute("firstname", firstname);
+            user.setFirstname(firstname);
         }
         if (!lastname.isEmpty()) {
             request.setAttribute("lastname", lastname);
+            user.setLastname(lastname);
         }
 
         if (username.isEmpty()) {
@@ -112,7 +105,9 @@ public class RegisterServlet extends HttpServlet {
 
             if (!matcher.matches()) {
                 request.setAttribute("invalidEmail", "Email is not in right format");
-
+                isInvalid = true;
+            } else if (!userService.checkIfEmailIsAvailable(email)) {
+                request.setAttribute("invalidEmail", "Email is not available");
                 isInvalid = true;
             }
         }
@@ -135,8 +130,19 @@ public class RegisterServlet extends HttpServlet {
         if (isInvalid) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
             dispatcher.forward(request, response);
-        }
+        } else {
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setUsername(username);
 
+            userService.register(user);
+
+            request.setAttribute("status", "200");
+            request.setAttribute("message", "Sucesfully registered. Please login!");
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     /**
