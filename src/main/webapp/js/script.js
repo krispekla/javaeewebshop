@@ -36,6 +36,9 @@ function addToCart(elementId, productId) {
     });
 }
 
+function resetQuantity(elementId, initialQuantity) {
+    document.getElementById(elementId).innerHTML = initialQuantity;
+}
 
 let status = sessionStorage.getItem("status");
 

@@ -64,10 +64,10 @@ public class CartDTO implements Serializable {
         }
 
         for (OrderItem item : items) {
-            if (item.getQuantity() != 0) {
-                temp = item.getPrice().multiply(new BigDecimal(item.getQuantity()));
-            }
-            totalPrice = totalPrice.add(temp);
+//            if (item.getQuantity() != 0) {
+//                temp = item.getPrice().multiply(new BigDecimal(item.getQuantity()));
+//            }
+            totalPrice = totalPrice.add(item.getPrice());
         }
         return totalPrice;
     }

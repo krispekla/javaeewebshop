@@ -34,14 +34,15 @@
     <c:choose>
         <c:when test="${isAuthenticated == true}">
             <div class="d-flex justify-content-center align-items-center mr-4">
-                <span class="text-white">welcome ${user.getUsername()}, 
-                    <a href="login?logout=true" class="text-primary mx-2" href="login.jsp">logout</a>
+                <span class="text-white display-6">welcome ${user.getUsername()}
+                    <a href="orders.jsp" class="text-white mx-2 ml-3 text-uppercase display-1" href="login.jsp">Order history</a>
+                    <a href="login?logout=true" class="text-white mx-2 text-uppercase display-1" href="login.jsp">logout</a>
                 </span>
             </div>
         </c:when>    
         <c:otherwise>
-            <a class="mr-4" href="login.jsp">login</a>
-            <a class="mr-5" href="register.jsp">register</a>
+            <a class="mr-4 text-uppercase" href="login.jsp">login</a>
+            <a class="mr-5 text-uppercase" href="register.jsp">register</a>
         </c:otherwise>
     </c:choose>
 
