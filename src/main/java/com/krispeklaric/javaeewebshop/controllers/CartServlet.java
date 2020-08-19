@@ -5,12 +5,22 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
+import com.google.gson.Gson;
+import com.krispeklaric.javaeewebshop.dtos.CartDTO;
+import com.krispeklaric.javaeewebshop.dtos.ProductDTO;
+import com.krispeklaric.javaeewebshop.models.OrderItem;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.Iterator;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,19 +39,79 @@ public class CartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CartServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CartServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+    }
+
+    protected void removeCartItemByProductId(HttpServletRequest request, HttpServletResponse response, Long removeItemId) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+
+        List<OrderItem> items = cart.getItems();
+        OrderItem temp = null;
+        for (OrderItem item : items) {
+            if (Long.compare(item.getProduct().getId_product(), removeItemId) == 0) {
+                temp = item;
+                break;
+            }
         }
+        if (temp != null) {
+            items.remove(temp);
+        }
+
+        cart.setItems(items);
+        session.setAttribute("cart", cart);
+
+        request.setAttribute("status", "200");
+        request.setAttribute("message", "Sucesfully removed item.");
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    protected void removeAllItems(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+
+        cart = new CartDTO();
+
+        session.setAttribute("cart", cart);
+
+        request.setAttribute("status", "200");
+        request.setAttribute("message", "Sucesfully removed all items.");
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void updateItem(HttpServletRequest request, HttpServletResponse response, long updateItemId, long quantity) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+
+        List<OrderItem> items = cart.getItems();
+        OrderItem temp = null;
+        int i = 0;
+        for (OrderItem item : items) {
+            if (Long.compare(item.getProduct().getId_product(), updateItemId) == 0) {
+                temp = item;
+                item.setQuantity(quantity);
+                BigDecimal newPrice = BigDecimal.valueOf(quantity).multiply(item.getProduct().getPrice());
+                item.setPrice(newPrice);
+                break;
+            }
+            i++;
+        }
+
+        cart.setItems(items);
+        session.setAttribute("cart", cart);
+
+        request.setAttribute("status", "200");
+        request.setAttribute("message", "Item quantity succesfully updated");
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +126,32 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String removeItem = request.getParameter("removeId");
+        String removeAll = request.getParameter("removeAll");
+        String updateItemId = request.getParameter("updateItemId");
+        String updateQuantity = request.getParameter("updateQuantity");
+
+        final StringBuilder sb = new StringBuilder();
+        try (final BufferedReader br = request.getReader();) {
+            String line = null;
+            while (null != (line = br.readLine())) {
+                sb.append(line);
+            }
+        }
+        Gson gson = new Gson();
+        ProductDTO product = gson.fromJson(sb.toString(), ProductDTO.class);
+
+        if (removeItem != null) {
+            removeCartItemByProductId(request, response, Long.parseLong(removeItem));
+        }
+
+        if (removeAll != null) {
+            removeAllItems(request, response);
+        }
+
+        if (updateItemId != null && updateQuantity != null) {
+            updateItem(request, response, Long.parseLong(updateItemId), Long.parseLong(updateQuantity));
+        }
     }
 
     /**

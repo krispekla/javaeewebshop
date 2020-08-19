@@ -37,13 +37,15 @@ function addToCart(elementId, productId) {
 }
 
 function resetQuantity(elementId, initialQuantity) {
-    document.getElementById(elementId).innerHTML = initialQuantity;
+    document.getElementById(elementId).value = initialQuantity;
 }
 
+
 let status = sessionStorage.getItem("status");
+let message = sessionStorage.getItem("message");
 
 if (status == 200) {
-    Notiflix.Notify.Success('Product added to cart');
+    Notiflix.Notify.Success(message);
 }
 
 sessionStorage.clear();

@@ -58,15 +58,11 @@ public class CartDTO implements Serializable {
 
     public BigDecimal calculateTotalPrice() {
         BigDecimal totalPrice = BigDecimal.ZERO;
-        BigDecimal temp = BigDecimal.ZERO;
         if (items == null) {
             return totalPrice;
         }
 
         for (OrderItem item : items) {
-//            if (item.getQuantity() != 0) {
-//                temp = item.getPrice().multiply(new BigDecimal(item.getQuantity()));
-//            }
             totalPrice = totalPrice.add(item.getPrice());
         }
         return totalPrice;

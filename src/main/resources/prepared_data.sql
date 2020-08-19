@@ -5,8 +5,8 @@ INSERT INTO category(created, modified, logourl, name) VALUES(NOW(), NOW(), 'htt
                                                 (NOW(), NOW(), 'https://drive.google.com/uc?export=view&id=14mBBCkFOBLb2OsgRjDZEN2T9lapZDwju', 'samsung'),
                                                 (NOW(), NOW(), 'https://drive.google.com/uc?export=view&id=1iG7VtowqrTIz_0YPFqGAFPsNxNZ09JPX', 'xiaomi')
 
-INSERT INTO public."user"(created, modified, password, username, email, firstname, lastname) VALUES(NOW(), NOW(), 'admin', 'admin', 'admin@admin.com', 'admin', 'admin'),
-                            (NOW(), NOW(), 'kris', 'kris', 'kris@kris.com', 'kris', 'pekla')
+INSERT INTO public."user"(created, modified, password, username, email, firstname, lastname) VALUES(NOW(), NOW(), 'Admin!123', 'admin', 'admin@admin.com', 'admin', 'admin'),
+                            (NOW(), NOW(), 'Kris!123', 'kris', 'kris@kris.com', 'kris', 'pekla')
 
 INSERT INTO user_role(name, username) VALUES('admin', 'admin'),
                                                ('customer', 'kris')
