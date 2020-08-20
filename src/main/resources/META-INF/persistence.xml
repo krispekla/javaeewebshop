@@ -12,6 +12,7 @@
     <class>com.krispeklaric.javaeewebshop.models.User_Role</class>
     <class>com.krispeklaric.javaeewebshop.models.UserRole</class>
     <class>com.krispeklaric.javaeewebshop.models.OrderItem</class>
+    <class>com.krispeklaric.javaeewebshop.models.Address</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/javaee"/>

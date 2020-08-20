@@ -38,3 +38,15 @@ INSERT INTO product(date, description, imgurl, manufacturer, name, price, catego
         (NOW(), 'Redmi Note 8 comes powered by MediaTek Helio G85 octa-core processor with a maximum frequency of 2.0GHz, a GPU frequency of 1000MHz, and up to 6GB of LPDDR4X RAM.', 'https://drive.google.com/uc?export=view&id=1srnC7ohGjT4dpQY9v8xODqmklOSNSocV', 'xiaomi', 'xiaomi redmi 8', 499, 6),
         (NOW(), 'Redmi Note 7 comes powered by MediaTek Helio G85 octa-core processor with a maximum frequency of 2.0GHz, a GPU frequency of 1000MHz, and up to 6GB of LPDDR4X RAM.', 'https://drive.google.com/uc?export=view&id=1srnC7ohGjT4dpQY9v8xODqmklOSNSocV', 'xiaomi', 'xiaomi redmi 7', 399, 6),
         (NOW(), 'Redmi Note 6 comes powered by MediaTek Helio G85 octa-core processor with a maximum frequency of 2.0GHz, a GPU frequency of 1000MHz, and up to 6GB of LPDDR4X RAM.', 'https://drive.google.com/uc?export=view&id=1srnC7ohGjT4dpQY9v8xODqmklOSNSocV', 'xiaomi', 'xiaomi redmi 6', 399, 6)
+
+
+INSERT INTO address(firstname, lastname, address, city, zip, phone) VALUES('Kris', 'Pekla', 'Ilica 1', 'Zagreb', '10000', '0991234567'),
+                            ('Pero', 'Peric', 'Ilica 2', 'Varaždin', '10000', '0991234567'),
+                            ('Kris', 'Pekla', 'Ilica 1', 'Zagreb', '10000', '0991234567')
+
+INSERT INTO public."order"(created, payment_type, total, user_id, address_id) VALUES(NOW(), 0, 1234, 1, 1)
+
+INSERT INTO order_item(quantity, price, order_id, product_id) VALUES(3, 1700, 1, 4),
+                                                                    (1, 640, 1, 3),
+                                                                    (2, 1250, 1, 6)
+

@@ -1,6 +1,7 @@
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\LoginServlet.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\models\PaymentType.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\ProductServlet.java
+C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\OrderHistoryServlet.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\models\Product.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\repositories\OrderRepository.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\RegisterServlet.java
@@ -11,7 +12,6 @@ C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\dtos\ProductDTO.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\repositories\BaseRepository.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\services\OrderService.java
-C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\utils\RoleFilter.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\services\UserService.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\utils\LocalDateAttributeConverter.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\CartServlet.java
@@ -21,6 +21,7 @@ C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\IndexServlet.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\services\ProductService.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\repositories\UserRepository.java
+C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\models\Address.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\repositories\UserRoleRepository.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\models\UserRole.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\dtos\LogDTO.java
@@ -28,6 +29,7 @@ C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\services\interfaces\IOrderService.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\utils\LocalDateTimeAttributeConverter.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\utils\SessionListener.java
+C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\PaymentServlet.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\models\OrderItem.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\utils\LogHelper.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\services\interfaces\IUserService.java
