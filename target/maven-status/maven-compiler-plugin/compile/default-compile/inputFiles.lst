@@ -6,8 +6,8 @@ C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\repositories\OrderRepository.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\RegisterServlet.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\controllers\DashboardServlet.java
-C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\dtos\OrderItemDTO.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\services\interfaces\IProductService.java
+C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\dtos\OrderDTO.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\models\User.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\dtos\ProductDTO.java
 C:\Users\Kris\source\repos\NetBeansProjects\javaeewebshop\javaeewebshop\src\main\java\com\krispeklaric\javaeewebshop\repositories\BaseRepository.java

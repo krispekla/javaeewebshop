@@ -10,6 +10,7 @@ import com.krispeklaric.javaeewebshop.models.UserRole;
 import com.krispeklaric.javaeewebshop.repositories.UserRepository;
 import com.krispeklaric.javaeewebshop.repositories.UserRoleRepository;
 import com.krispeklaric.javaeewebshop.services.interfaces.IUserService;
+import java.util.List;
 
 /**
  *
@@ -49,6 +50,16 @@ public class UserService implements IUserService {
     @Override
     public UserRole getUserRole(User user) {
         return _userRoleRepository.get(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return _userRepository.getAll();
+    }
+
+    @Override
+    public User get(String username) {
+        return _userRepository.getByUsername(username);
     }
 
 }

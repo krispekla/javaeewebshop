@@ -7,6 +7,7 @@ package com.krispeklaric.javaeewebshop.repositories;
 
 import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.models.UserRole;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -83,6 +84,37 @@ public class UserRepository extends BaseRepository {
             em.persist(userRole);
             em.getTransaction().commit();
             return user;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public List<User> getAll() {
+        EntityManager em = null;
+
+        try {
+            em = getEntityManager();
+            Query q = em.createQuery("SELECT p FROM User p");
+            return (List<User>) q.getResultList();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public User getByUsername(String username) {
+        EntityManager em = null;
+
+        try {
+            em = getEntityManager();
+            Query q = em.createQuery("SELECT p FROM User p WHERE p.username = :username");
+            q.setParameter("username", username);
+            return (User) q.getSingleResult();
+        } catch (Exception ex) {
+            return null;
         } finally {
             if (em != null) {
                 em.close();

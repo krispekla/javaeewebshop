@@ -131,16 +131,6 @@ public class CartServlet extends HttpServlet {
         String updateItemId = request.getParameter("updateItemId");
         String updateQuantity = request.getParameter("updateQuantity");
 
-        final StringBuilder sb = new StringBuilder();
-        try (final BufferedReader br = request.getReader();) {
-            String line = null;
-            while (null != (line = br.readLine())) {
-                sb.append(line);
-            }
-        }
-        Gson gson = new Gson();
-        ProductDTO product = gson.fromJson(sb.toString(), ProductDTO.class);
-
         if (removeItem != null) {
             removeCartItemByProductId(request, response, Long.parseLong(removeItem));
         }

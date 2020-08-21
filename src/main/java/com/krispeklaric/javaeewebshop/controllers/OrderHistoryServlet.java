@@ -5,9 +5,12 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
-import com.krispeklaric.javaeewebshop.dtos.CartDTO;
+import com.krispeklaric.javaeewebshop.models.Order;
+import com.krispeklaric.javaeewebshop.models.User;
+import com.krispeklaric.javaeewebshop.services.OrderService;
+import com.krispeklaric.javaeewebshop.services.UserService;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +49,32 @@ public class OrderHistoryServlet extends HttpServlet {
             return;
         }
 
-//        if(!role == "admin") {}
+        OrderService orderService = new OrderService();
+
+        if (!session.getAttribute("role").equals("admin")) {
+            List<Order> orders = orderService.getAll((User) session.getAttribute("user"));
+            request.setAttribute("orders", orders);
+
+        } else {
+            UserService userService = new UserService();
+            List<User> users = userService.getAll();
+            List<Order> orders;
+
+            String username = request.getParameter("username");
+
+            if (username != null) {
+                User resultUser = userService.get(username);
+                orders = orderService.getAll(resultUser);
+
+            } else {
+
+                orders = orderService.getAll();
+            }
+
+            request.setAttribute("orders", orders);
+            request.setAttribute("users", users);
+        }
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp");
         dispatcher.forward(request, response);
     }

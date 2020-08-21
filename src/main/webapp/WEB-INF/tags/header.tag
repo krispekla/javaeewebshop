@@ -34,13 +34,26 @@
     <c:choose>
         <c:when test="${isAuthenticated == true}">
             <div class="d-flex justify-content-center align-items-center mr-4">
-                <span class="text-white display-6">welcome ${user.getUsername()}
+                <div class="d-flex justify-content-center align-items-center text-white display-6">
+                    <span >welcome ${user.getUsername()}</span>
                     <c:if test="${role == 'admin'}" >
-                        <a href="dashboard" class="text-white mx-2 ml-3 text-uppercase display-1" href="login.jsp">Dashboard</a>
+
+                        <div class="dropdown mx-4">
+                            <button class="btn btn-secondary shadow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin dashboard
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a href="dashboard" class="dropdown-item   text-dark">Logs</a>
+                                <a href="order-history" class="dropdown-item  text-dark">Orders</a>
+                            </div>
+                        </div>
+
                     </c:if>
-                    <a href="order-history" class="text-white mx-2 ml-3 text-uppercase display-1" href="login.jsp">Order history</a>
+                    <c:if test="${role != 'admin'}" >
+                        <a href="order-history" class="text-white mx-2 ml-3 text-uppercase display-1" href="login.jsp">Order history</a>
+                    </c:if>
                     <a href="login?logout=true" class="text-white mx-2 text-uppercase display-1" href="login.jsp">logout</a>
-                </span>
+                </div>
             </div>
         </c:when>    
         <c:otherwise>

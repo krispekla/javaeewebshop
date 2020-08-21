@@ -48,6 +48,10 @@ if (status == 200) {
     Notiflix.Notify.Success(message);
 }
 
+if (status == 500) {
+    Notiflix.Notify.Failure(message);
+}
+
 sessionStorage.clear();
 
 

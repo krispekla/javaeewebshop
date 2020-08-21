@@ -5,8 +5,11 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
+import com.krispeklaric.javaeewebshop.dtos.LogDTO;
+import com.krispeklaric.javaeewebshop.utils.LogHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,6 +55,9 @@ public class DashboardServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
+
+        List<LogDTO> logs = LogHelper.readLogs();
+        request.setAttribute("logs", logs);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/dashboard.jsp");
         dispatcher.forward(request, response);

@@ -5,8 +5,15 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
+import com.google.gson.Gson;
+import com.krispeklaric.javaeewebshop.dtos.CartDTO;
+import com.krispeklaric.javaeewebshop.dtos.OrderDTO;
+import com.krispeklaric.javaeewebshop.models.Order;
+import com.krispeklaric.javaeewebshop.models.User;
+import com.krispeklaric.javaeewebshop.services.OrderService;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -74,7 +81,45 @@ public class PaymentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        final StringBuilder sb = new StringBuilder();
+        try (final BufferedReader br = request.getReader();) {
+            String line = null;
+            while (null != (line = br.readLine())) {
+                sb.append(line);
+            }
+        }
+
+        Gson gson = new Gson();
+        OrderDTO order = gson.fromJson(sb.toString(), OrderDTO.class);
+
+        HttpSession session = request.getSession();
+
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        User user = (User) session.getAttribute("user");
+
+        order.setUser(user);
+        order.setItems(cart.getItems());
+
+        OrderService orderService = new OrderService();
+        Order result = orderService.create(order);
+
+        List<Order> orders = orderService.getAll(user);
+
+        session.setAttribute("cart", new CartDTO());
+        session.setAttribute("orders", orders);
+        if (result != null) {
+            response.setStatus(HttpServletResponse.SC_OK);
+
+            request.setAttribute("status", "200");
+            request.setAttribute("data", "Order succesfully created!");
+
+        } else {
+            response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+
+            request.setAttribute("status", "500");
+            request.setAttribute("data", "Order could not be created, please contact support!");
+        }
     }
 
     /**

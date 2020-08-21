@@ -5,11 +5,18 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
+import com.krispeklaric.javaeewebshop.dtos.CartDTO;
+import com.krispeklaric.javaeewebshop.dtos.LogDTO;
+import com.krispeklaric.javaeewebshop.models.Order;
 import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.models.UserRole;
+import com.krispeklaric.javaeewebshop.services.OrderService;
 import com.krispeklaric.javaeewebshop.services.UserService;
 import com.krispeklaric.javaeewebshop.services.interfaces.IUserService;
+import com.krispeklaric.javaeewebshop.utils.LogHelper;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -54,7 +61,8 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             session.setAttribute("user", null);
-            session.setAttribute("role",null);
+            session.setAttribute("role", null);
+            session.setAttribute("cart", new CartDTO());
             session.setAttribute("isAuthenticated", false);
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
@@ -98,7 +106,15 @@ public class LoginServlet extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
         } else {
+            OrderService orderService = new OrderService();
             UserRole userRole = userService.getUserRole(result);
+
+            LogDTO log = new LogDTO();
+            log.setDateTime(LocalDateTime.now());
+            log.setUsername(username);
+            log.setIpAddress(LogHelper.getClientIpAddress(request));
+            LogHelper.writeLog(log.toString());
+
             HttpSession session = request.getSession();
             session.setAttribute("user", result);
             session.setAttribute("role", userRole.getName());

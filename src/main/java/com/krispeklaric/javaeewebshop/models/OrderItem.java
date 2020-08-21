@@ -31,7 +31,6 @@ public class OrderItem implements Serializable {
 
     private long quantity;
 
-    @Column(columnDefinition = "Money")
     private BigDecimal price;
 
     @OneToOne

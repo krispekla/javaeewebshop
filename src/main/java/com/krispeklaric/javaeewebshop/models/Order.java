@@ -41,7 +41,6 @@ public class Order implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private PaymentType payment_type;
 
-    @Column(columnDefinition = "Money")
     private BigDecimal total;
 
     @OneToOne
@@ -63,8 +62,6 @@ public class Order implements Serializable {
         this.address = address;
     }
 
-    
-    
     public Order() {
     }
 

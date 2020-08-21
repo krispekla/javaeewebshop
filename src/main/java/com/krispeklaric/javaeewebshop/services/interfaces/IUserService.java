@@ -7,6 +7,7 @@ package com.krispeklaric.javaeewebshop.services.interfaces;
 
 import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.models.UserRole;
+import java.util.List;
 
 /**
  *
@@ -23,5 +24,9 @@ public interface IUserService {
     boolean checkIfEmailIsAvailable(String email);
 
     UserRole getUserRole(User user);
+
+    List<User> getAll();
+
+    User get(String username);
 
 }

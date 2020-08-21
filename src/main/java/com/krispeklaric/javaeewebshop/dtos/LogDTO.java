@@ -51,16 +51,16 @@ public class LogDTO {
 
     @Override
     public String toString() {
-        String formattedTime = dateFormatter.format(this.dateTime);
-        return formattedTime + this.DELMITER + this.username + this.DELMITER + this.ipAddress;
+//        String formattedTime = dateFormatter.format(this.dateTime);
+        return this.dateTime + this.DELMITER + this.username + this.DELMITER + this.ipAddress + System.getProperty("line.separator");
     }
 
     public LogDTO parseLog(String line) {
         LogDTO logDTO = new LogDTO();
-        String[] temp = line.split(this.DELMITER);
-        logDTO.dateTime = LocalDateTime.parse(temp[0],dateFormatter);
-        logDTO.username = temp[1];
-        logDTO.ipAddress = temp[2];
+        String[] temp = line.split("\\" + this.DELMITER);
+        logDTO.setDateTime(LocalDateTime.parse(temp[0]));
+        logDTO.setUsername(temp[1]);
+        logDTO.setIpAddress(temp[2]);
 
         return logDTO;
     }

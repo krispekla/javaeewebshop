@@ -72,7 +72,7 @@
                 <h5 class="text-center h5 mt-3">Select type of payment and pay:</h5>
                 <div class="d-flex justify-content-center align-items-center mt-5">
                     <div id="paypal-button"></div>
-                    <button class="btn btn-success shadow ml-5 p-3">Pay by recipient</button>
+                    <button onclick="createOrder('Cash')" class="btn btn-success shadow ml-5 p-3">Pay by recipient</button>
                 </div>
             </section>
         </div>
@@ -81,20 +81,63 @@
 </t:layout>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
-<script>
-
-                        function checkValidationsGoToNext(e) {
+<script type="text/javascript">
+                        function checkValidationsGoToNext() {
                             let nextBtn = document.querySelector("#example-basic > div.actions.clearfix > ul > li:nth-child(2) > a");
                             nextBtn.click();
                         }
                         ;
 
-                        var form = $("#example-basic");
+                        let form = $("#example-basic");
                         form.steps({
                             headerTag: "h3",
                             bodyTag: "section",
                             autoFocus: true
                         });
+
+
+                        function createOrder(payType) {
+                            let firstname = document.getElementById("firstname").value;
+                            let lastname = document.getElementById("lastname").value;
+                            let address = document.getElementById("address").value;
+                            let city = document.getElementById("city").value;
+                            let zip = document.getElementById("zip").value;
+                            let phone = document.getElementById("phone").value;
+
+
+                            let addressData = {
+                                firstname,
+                                lastname,
+                                address,
+                                city,
+                                zip,
+                                phone
+                            }
+
+                            let data = {
+                                address: addressData,
+                                paymentType: payType
+                            };
+
+                            axios.post('payment', data).then(response => {
+
+                                if (response.status === 200) {
+                                    console.log(response)
+                                    sessionStorage.setItem("status", 200);
+                                    sessionStorage.setItem("message", "Order succesfully created");
+
+                                    window.location.href = 'http://localhost:8080/javaeewebshop/order-history';
+                                } else if (response.status === 503) {
+                                    sessionStorage.setItem("status", 500);
+                                    sessionStorage.setItem("message", "Order could not be created, please contact support");
+                                    window.location.reload();
+                                }
+                            }).catch(error => {
+                                Notiflix.Notify.Failure(error);
+                            });
+                        }
+
+
 
                         paypal.Button.render({
                             // Configure environment
