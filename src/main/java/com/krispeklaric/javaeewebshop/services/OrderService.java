@@ -10,6 +10,7 @@ import com.krispeklaric.javaeewebshop.models.Order;
 import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.repositories.OrderRepository;
 import com.krispeklaric.javaeewebshop.services.interfaces.IOrderService;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,8 +47,13 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> getAll(LocalDateTime date) {
+    public List<Order> getAll(LocalDate date) {
         List<Order> resultOrders = _orderRepository.getAll(date);
+        return resultOrders;
+    }
+    @Override
+    public List<Order> getAll(User user, LocalDate date) {
+        List<Order> resultOrders = _orderRepository.getAll(user, date);
         return resultOrders;
     }
 

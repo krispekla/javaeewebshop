@@ -9,6 +9,7 @@ import com.krispeklaric.javaeewebshop.models.Address;
 import com.krispeklaric.javaeewebshop.models.Order;
 import com.krispeklaric.javaeewebshop.models.OrderItem;
 import com.krispeklaric.javaeewebshop.models.User;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -78,13 +79,31 @@ public class OrderRepository extends BaseRepository {
         }
     }
 
-    public List<Order> getAll(LocalDateTime created) {
+    public List<Order> getAll(LocalDate created) {
         EntityManager em = null;
 
         try {
             em = getEntityManager();
-            Query q = em.createQuery("SELECT p FROM Order p WHERE p.created = :created");
-            q.setParameter("created", created);
+            Query q = em.createQuery("SELECT p FROM Order p WHERE p.created  BETWEEN :start AND :end");
+            q.setParameter("start", created.atStartOfDay());
+            q.setParameter("end", created.plusDays(1).atStartOfDay());
+            return (List<Order>) q.getResultList();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public List<Order> getAll(User user, LocalDate date) {
+        EntityManager em = null;
+
+        try {
+            em = getEntityManager();
+            Query q = em.createQuery("SELECT p FROM Order p WHERE P.user = :userid AND p.created  BETWEEN :start AND :end");
+            q.setParameter("userid", user);
+            q.setParameter("start", date.atStartOfDay());
+            q.setParameter("end", date.plusDays(1).atStartOfDay());
             return (List<Order>) q.getResultList();
         } finally {
             if (em != null) {

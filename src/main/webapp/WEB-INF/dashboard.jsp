@@ -36,13 +36,26 @@
                         <td>${log.getUsername()}</td>
                         <td>${log.getDateTime().toLocalDate()} ${log.getDateTime().getHour()}: ${log.getDateTime().getMinute()}</td>
                         <td>${log.getIpAddress()}</td>
-
                     </tr>  
                     <c:set var = "nbId" scope = "page" value = "${nbId + 1}"/>
                 </c:forEach>
             </tbody>
         </table>
 
+        <nav aria-label="Page navigation example" class="mt-5">
+            <ul class="pagination justify-content-end">
+                <c:forEach var = "i" begin = "1" end = "${pages}">
+                    <c:choose>
+                        <c:when test="${i == current}">
+                            <li class="page-item active"><a class="page-link" href="dashboard?page=${i}">${i}</a></li>
+                        </c:when>    
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="dashboard?page=${i}">${i}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </ul>
+        </nav>
     </section>
 </t:layout>
 

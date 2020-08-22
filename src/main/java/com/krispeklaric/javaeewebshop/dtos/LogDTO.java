@@ -5,7 +5,6 @@
  */
 package com.krispeklaric.javaeewebshop.dtos;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

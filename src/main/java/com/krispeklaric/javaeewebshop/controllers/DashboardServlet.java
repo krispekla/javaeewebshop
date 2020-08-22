@@ -10,6 +10,7 @@ import com.krispeklaric.javaeewebshop.utils.LogHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,8 +57,22 @@ public class DashboardServlet extends HttpServlet {
             return;
         }
 
+        String page = request.getParameter("page");
+
+        Integer pageNb = 1;
+        if (page != null) {
+            pageNb = Integer.parseInt(page);
+        }
+        Integer rowPerPage = 10;
+
         List<LogDTO> logs = LogHelper.readLogs();
-        request.setAttribute("logs", logs);
+        Integer pageCount = (logs.size() + rowPerPage - 1) / rowPerPage;
+        Integer skip = rowPerPage * (pageNb - 1);
+                
+
+        request.setAttribute("logs", logs.stream().skip(skip).limit(rowPerPage).collect(Collectors.toList()));
+        request.setAttribute("pages", pageCount);
+        request.setAttribute("current", pageNb);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/dashboard.jsp");
         dispatcher.forward(request, response);

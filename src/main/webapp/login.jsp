@@ -17,7 +17,7 @@
 
             <div class="form-group">
                 <label for="username">Username <span class="text-danger">*</span></label>
-                <input name="username" type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username" required>
+                <input name="username" type="text" class="form-control" id="username" autofocus aria-describedby="emailHelp" placeholder="Enter username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password <span class="text-danger">*</span></label>

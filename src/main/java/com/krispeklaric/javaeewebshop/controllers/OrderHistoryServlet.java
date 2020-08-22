@@ -10,6 +10,9 @@ import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.services.OrderService;
 import com.krispeklaric.javaeewebshop.services.UserService;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -61,13 +64,19 @@ public class OrderHistoryServlet extends HttpServlet {
             List<Order> orders;
 
             String username = request.getParameter("username");
+            String date = request.getParameter("date");
 
-            if (username != null) {
+            if (username != null && date != null) {
+                LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                User resultUser = userService.get(username);
+                orders = orderService.getAll(resultUser, parsedDate);
+            } else if (username != null) {
                 User resultUser = userService.get(username);
                 orders = orderService.getAll(resultUser);
-
+            } else if (date != null) {
+                LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                orders = orderService.getAll(parsedDate);
             } else {
-
                 orders = orderService.getAll();
             }
 

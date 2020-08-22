@@ -9,7 +9,6 @@ import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.models.UserRole;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**

@@ -16,9 +16,10 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/javaee"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://javamobileshopsql.postgres.database.azure.com:5432/postgres"/>
+      <property name="javax.persistence.jdbc.user" value="kris@javamobileshopsql"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="postgres"/>
+      <property name="javax.persistence.jdbc.password" value="Postgresql!123"/>
       <property name="eclipselink.target-database" value="Auto"/>
     </properties>
   </persistence-unit>

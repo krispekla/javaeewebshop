@@ -8,6 +8,7 @@ package com.krispeklaric.javaeewebshop.services.interfaces;
 import com.krispeklaric.javaeewebshop.dtos.OrderDTO;
 import com.krispeklaric.javaeewebshop.models.Order;
 import com.krispeklaric.javaeewebshop.models.User;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public interface IOrderService {
 
     List<Order> getAll();
 
-    List<Order> getAll(LocalDateTime date);
+    List<Order> getAll(LocalDate date);
+
+    List<Order> getAll(User user, LocalDate date);
 
 }
