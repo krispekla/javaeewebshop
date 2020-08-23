@@ -126,7 +126,7 @@
                                     sessionStorage.setItem("status", 200);
                                     sessionStorage.setItem("message", "Order succesfully created");
 
-                                    window.location.href = 'http://localhost:8080/javaeewebshop/order-history';
+                                    window.location.href = 'https://smartphoneshop.azurewebsites.net/app/order-history';
                                 } else if (response.status === 503) {
                                     sessionStorage.setItem("status", 500);
                                     sessionStorage.setItem("message", "Order could not be created, please contact support");

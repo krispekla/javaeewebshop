@@ -7,5 +7,5 @@
 <%@tag description="footer" pageEncoding="UTF-8"%>
 
 <footer class="footer">
-    Java Web Shop © Kris Peklaric
+    <a class="text-white" href="faces/about.xhtml">Java Web Shop © Kris Peklaric</a>
 </footer>
