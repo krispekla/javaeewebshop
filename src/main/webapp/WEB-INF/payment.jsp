@@ -87,15 +87,12 @@
                             nextBtn.click();
                         }
                         ;
-
                         let form = $("#example-basic");
                         form.steps({
                             headerTag: "h3",
                             bodyTag: "section",
                             autoFocus: true
                         });
-
-
                         function createOrder(payType) {
                             let firstname = document.getElementById("firstname").value;
                             let lastname = document.getElementById("lastname").value;
@@ -103,8 +100,6 @@
                             let city = document.getElementById("city").value;
                             let zip = document.getElementById("zip").value;
                             let phone = document.getElementById("phone").value;
-
-
                             let addressData = {
                                 firstname,
                                 lastname,
@@ -118,14 +113,12 @@
                                 address: addressData,
                                 paymentType: payType
                             };
-
                             axios.post('payment', data).then(response => {
 
                                 if (response.status === 200) {
                                     console.log(response)
                                     sessionStorage.setItem("status", 200);
                                     sessionStorage.setItem("message", "Order succesfully created");
-
                                     window.location.href = 'https://smartphoneshop.azurewebsites.net/app/order-history';
                                 } else if (response.status === 503) {
                                     sessionStorage.setItem("status", 500);
@@ -137,8 +130,7 @@
                             });
                         }
 
-
-
+                        const totalPrice = '${cart.calculateTotalPrice()}';
                         paypal.Button.render({
                             // Configure environment
                             env: 'sandbox',
@@ -153,26 +145,23 @@
                                 color: 'gold',
                                 shape: 'rect',
                             },
-
                             // Enable Pay Now checkout flow (optional)
                             commit: true,
-
                             // Set up a payment
                             payment: function (data, actions) {
                                 return actions.payment.create({
                                     transactions: [{
                                             amount: {
-                                                total: '0.01',
-                                                currency: 'USD'
+                                                total: totalPrice,
+                                                currency: 'USD',
                                             }
-                                        }]
+                                        }],
                                 });
                             },
                             // Execute the payment
                             onAuthorize: function (data, actions) {
                                 return actions.payment.execute().then(function () {
-                                    // Show a confirmation message to the buyer
-                                    window.alert('Thank you for your purchase!');
+                                    createOrder('CreditCard');
                                 });
                             }
                         }, '#paypal-button')
