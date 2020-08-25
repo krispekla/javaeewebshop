@@ -11,6 +11,7 @@ import com.krispeklaric.javaeewebshop.dtos.OrderDTO;
 import com.krispeklaric.javaeewebshop.models.Order;
 import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.services.OrderService;
+import com.krispeklaric.javaeewebshop.utils.Constants;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
@@ -39,12 +40,12 @@ public class PaymentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Boolean isAuthenticated = (Boolean) session.getAttribute("isAuthenticated");
+        Boolean isAuthenticated = (Boolean) session.getAttribute(Constants.IS_AUTHENTICATED);
 
         if (!isAuthenticated) {
 
-            request.setAttribute("status", "401");
-            request.setAttribute("message", "Unauthorized, please login to proceed with payment!");
+            request.setAttribute(Constants.STATUS, "401");
+            request.setAttribute(Constants.MESSAGE, "Unauthorized, please login to proceed with payment!");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
@@ -95,8 +96,8 @@ public class PaymentServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        CartDTO cart = (CartDTO) session.getAttribute("cart");
-        User user = (User) session.getAttribute("user");
+        CartDTO cart = (CartDTO) session.getAttribute(Constants.CART);
+        User user = (User) session.getAttribute(Constants.USER);
 
         order.setUser(user);
         order.setItems(cart.getItems());
@@ -106,18 +107,18 @@ public class PaymentServlet extends HttpServlet {
 
         List<Order> orders = orderService.getAll(user);
 
-        session.setAttribute("cart", new CartDTO());
-        session.setAttribute("orders", orders);
+        session.setAttribute(Constants.CART, new CartDTO());
+        session.setAttribute(Constants.ORDERS, orders);
         if (result != null) {
             response.setStatus(HttpServletResponse.SC_OK);
 
-            request.setAttribute("status", "200");
+            request.setAttribute(Constants.STATUS, "200");
             request.setAttribute("data", "Order succesfully created!");
 
         } else {
             response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
 
-            request.setAttribute("status", "500");
+            request.setAttribute(Constants.STATUS, "500");
             request.setAttribute("data", "Order could not be created, please contact support!");
         }
     }

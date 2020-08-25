@@ -6,9 +6,9 @@
 package com.krispeklaric.javaeewebshop.controllers;
 
 import com.krispeklaric.javaeewebshop.dtos.LogDTO;
+import com.krispeklaric.javaeewebshop.utils.Constants;
 import com.krispeklaric.javaeewebshop.utils.LogHelper;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
@@ -36,12 +36,12 @@ public class DashboardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Boolean isAuthenticated = (Boolean) session.getAttribute("isAuthenticated");
-        String role = (String) session.getAttribute("role");
+        Boolean isAuthenticated = (Boolean) session.getAttribute(Constants.IS_AUTHENTICATED);
+        String role = (String) session.getAttribute(Constants.ROLE);
 
         if (!isAuthenticated) {
-            request.setAttribute("status", "401");
-            request.setAttribute("message", "Unauthorized, please login to proceed with payment!");
+            request.setAttribute(Constants.STATUS, "401");
+            request.setAttribute(Constants.MESSAGE, "Unauthorized, please login to proceed with payment!");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
@@ -49,8 +49,8 @@ public class DashboardServlet extends HttpServlet {
         }
 
         if (!role.equalsIgnoreCase("admin")) {
-            request.setAttribute("status", "401");
-            request.setAttribute("message", "Unauthorized, you do not have admin rights!");
+            request.setAttribute(Constants.STATUS, "401");
+            request.setAttribute(Constants.MESSAGE, "Unauthorized, you do not have admin rights!");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);

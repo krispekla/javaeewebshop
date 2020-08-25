@@ -7,16 +7,15 @@ package com.krispeklaric.javaeewebshop.controllers;
 
 import com.krispeklaric.javaeewebshop.dtos.CartDTO;
 import com.krispeklaric.javaeewebshop.dtos.LogDTO;
-import com.krispeklaric.javaeewebshop.models.Order;
 import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.models.UserRole;
 import com.krispeklaric.javaeewebshop.services.OrderService;
 import com.krispeklaric.javaeewebshop.services.UserService;
 import com.krispeklaric.javaeewebshop.services.interfaces.IUserService;
+import com.krispeklaric.javaeewebshop.utils.Constants;
 import com.krispeklaric.javaeewebshop.utils.LogHelper;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -60,10 +59,10 @@ public class LoginServlet extends HttpServlet {
         if (!logout.isEmpty()) {
             HttpSession session = request.getSession();
 
-            session.setAttribute("user", null);
-            session.setAttribute("role", null);
-            session.setAttribute("cart", new CartDTO());
-            session.setAttribute("isAuthenticated", false);
+            session.setAttribute(Constants.USER, null);
+            session.setAttribute(Constants.ROLE, null);
+            session.setAttribute(Constants.CART, new CartDTO());
+            session.setAttribute(Constants.IS_AUTHENTICATED, false);
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
@@ -86,8 +85,8 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         boolean isInvalid = false;
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter(Constants.PARAM_USERNAME);
+        String password = request.getParameter(Constants.PARAM_PASSWORD);
 
         if (username.isEmpty() || password.isEmpty()) {
             request.setAttribute("invalidLogin", "Username and password cannot be empty");
@@ -106,7 +105,6 @@ public class LoginServlet extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
         } else {
-            OrderService orderService = new OrderService();
             UserRole userRole = userService.getUserRole(result);
 
             LogDTO log = new LogDTO();
@@ -116,12 +114,12 @@ public class LoginServlet extends HttpServlet {
             LogHelper.writeLog(log.toString());
 
             HttpSession session = request.getSession();
-            session.setAttribute("user", result);
-            session.setAttribute("role", userRole.getName());
-            session.setAttribute("isAuthenticated", true);
+            session.setAttribute(Constants.USER, result);
+            session.setAttribute(Constants.ROLE, userRole.getName());
+            session.setAttribute(Constants.IS_AUTHENTICATED, true);
 
-            request.setAttribute("status", "200");
-            request.setAttribute("message", "Sucesfully logged in");
+            request.setAttribute(Constants.STATUS, "200");
+            request.setAttribute(Constants.MESSAGE, "Sucesfully logged in");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);

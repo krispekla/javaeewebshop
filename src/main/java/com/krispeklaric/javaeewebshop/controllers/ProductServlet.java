@@ -12,6 +12,7 @@ import com.krispeklaric.javaeewebshop.models.OrderItem;
 import com.krispeklaric.javaeewebshop.models.Product;
 import com.krispeklaric.javaeewebshop.services.ProductService;
 import com.krispeklaric.javaeewebshop.services.interfaces.IProductService;
+import com.krispeklaric.javaeewebshop.utils.Constants;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
@@ -40,11 +41,11 @@ public class ProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String category = request.getParameter("category");
+        String category = request.getParameter(Constants.PARAM_CATEGORY);
 
         IProductService productService = new ProductService();
         List<Product> products = productService.getProduct(category);
-        request.setAttribute("products", products);
+        request.setAttribute(Constants.PRODUCTS, products);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-overview.jsp");
         dispatcher.forward(request, response);
@@ -88,14 +89,14 @@ public class ProductServlet extends HttpServlet {
         ProductDTO product = gson.fromJson(sb.toString(), ProductDTO.class);
 
         HttpSession session = request.getSession();
-        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        CartDTO cart = (CartDTO) session.getAttribute(Constants.CART);
 
         ProductService productService = new ProductService();
         OrderItem item = productService.get(product.getId(), product.getQuantity());
         
         cart.addOrUpdateItem(item);
 
-        session.setAttribute("cart", cart);
+        session.setAttribute(Constants.CART, cart);
 
         response.setStatus(HttpServletResponse.SC_OK);
         

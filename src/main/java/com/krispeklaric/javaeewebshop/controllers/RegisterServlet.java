@@ -10,7 +10,6 @@ import com.krispeklaric.javaeewebshop.services.UserService;
 import com.krispeklaric.javaeewebshop.services.interfaces.IUserService;
 import com.krispeklaric.javaeewebshop.utils.Constants;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -70,26 +69,26 @@ public class RegisterServlet extends HttpServlet {
         User user = new User();
 
 //        Params
-        String username = request.getParameter("username");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String username = request.getParameter(Constants.PARAM_USERNAME);
+        String firstname = request.getParameter(Constants.PARAM_FIRSTNAME);
+        String lastname = request.getParameter(Constants.PARAM_LASTNAME);
+        String email = request.getParameter(Constants.PARAM_EMAIL);
+        String password = request.getParameter(Constants.PARAM_PASSWORD);
 
 //        Validations
         if (!firstname.isEmpty()) {
-            request.setAttribute("firstname", firstname);
+            request.setAttribute(Constants.PARAM_FIRSTNAME, firstname);
             user.setFirstname(firstname);
         }
         if (!lastname.isEmpty()) {
-            request.setAttribute("lastname", lastname);
+            request.setAttribute(Constants.PARAM_LASTNAME, lastname);
             user.setLastname(lastname);
         }
 
         if (username.isEmpty()) {
             request.setAttribute("invalidUsername", "Username is required");
         } else {
-            request.setAttribute("username", username);
+            request.setAttribute(Constants.PARAM_USERNAME, username);
             if (!userService.checkIfUsernameIsAvailable(username)) {
                 request.setAttribute("invalidUsername", "Username already in use");
 
@@ -100,7 +99,7 @@ public class RegisterServlet extends HttpServlet {
         if (email.isEmpty()) {
             request.setAttribute("invalidEmail", "Email is required");
         } else {
-            request.setAttribute("email", email);
+            request.setAttribute(Constants.PARAM_EMAIL, email);
             Matcher matcher = Constants.EMAIL_REGEX.matcher(email);
 
             if (!matcher.matches()) {
@@ -117,7 +116,7 @@ public class RegisterServlet extends HttpServlet {
             Matcher matcherPassword = Constants.PASSWORD_REGEX.matcher(password);
 
             if (!matcherPassword.matches()) {
-                request.setAttribute("invalidPassword", "Minimum 8 characters at least 1 Alphabet and 1 Number");
+                request.setAttribute("invalidPassword", "Minimum eight characters, at least one letter, one number and one special character");
 
                 isInvalid = true;
             }
@@ -137,8 +136,8 @@ public class RegisterServlet extends HttpServlet {
 
             userService.register(user);
 
-            request.setAttribute("status", "200");
-            request.setAttribute("message", "Sucesfully registered. Please login!");
+            request.setAttribute(Constants.STATUS, "200");
+            request.setAttribute(Constants.MESSAGE, "Sucesfully registered. Please login!");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);

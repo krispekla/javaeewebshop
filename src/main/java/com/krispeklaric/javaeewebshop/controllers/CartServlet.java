@@ -5,15 +5,11 @@
  */
 package com.krispeklaric.javaeewebshop.controllers;
 
-import com.google.gson.Gson;
 import com.krispeklaric.javaeewebshop.dtos.CartDTO;
-import com.krispeklaric.javaeewebshop.dtos.ProductDTO;
 import com.krispeklaric.javaeewebshop.models.OrderItem;
-import java.io.BufferedReader;
+import com.krispeklaric.javaeewebshop.utils.Constants;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,7 +41,7 @@ public class CartServlet extends HttpServlet {
     protected void removeCartItemByProductId(HttpServletRequest request, HttpServletResponse response, Long removeItemId) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        CartDTO cart = (CartDTO) session.getAttribute(Constants.CART);
 
         List<OrderItem> items = cart.getItems();
         OrderItem temp = null;
@@ -60,10 +56,10 @@ public class CartServlet extends HttpServlet {
         }
 
         cart.setItems(items);
-        session.setAttribute("cart", cart);
+        session.setAttribute(Constants.CART, cart);
 
-        request.setAttribute("status", "200");
-        request.setAttribute("message", "Sucesfully removed item.");
+        request.setAttribute(Constants.STATUS, "200");
+        request.setAttribute(Constants.MESSAGE, "Sucesfully removed item.");
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
         dispatcher.forward(request, response);
@@ -72,14 +68,14 @@ public class CartServlet extends HttpServlet {
     protected void removeAllItems(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        CartDTO cart = (CartDTO) session.getAttribute(Constants.CART);
 
         cart = new CartDTO();
 
-        session.setAttribute("cart", cart);
+        session.setAttribute(Constants.CART, cart);
 
-        request.setAttribute("status", "200");
-        request.setAttribute("message", "Sucesfully removed all items.");
+        request.setAttribute(Constants.STATUS, "200");
+        request.setAttribute(Constants.MESSAGE, "Sucesfully removed all items.");
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
         dispatcher.forward(request, response);
@@ -88,7 +84,7 @@ public class CartServlet extends HttpServlet {
     private void updateItem(HttpServletRequest request, HttpServletResponse response, long updateItemId, long quantity) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        CartDTO cart = (CartDTO) session.getAttribute(Constants.CART);
 
         List<OrderItem> items = cart.getItems();
         OrderItem temp = null;
@@ -105,10 +101,10 @@ public class CartServlet extends HttpServlet {
         }
 
         cart.setItems(items);
-        session.setAttribute("cart", cart);
+        session.setAttribute(Constants.CART, cart);
 
-        request.setAttribute("status", "200");
-        request.setAttribute("message", "Item quantity succesfully updated");
+        request.setAttribute(Constants.STATUS, "200");
+        request.setAttribute(Constants.MESSAGE, "Item quantity succesfully updated");
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
         dispatcher.forward(request, response);

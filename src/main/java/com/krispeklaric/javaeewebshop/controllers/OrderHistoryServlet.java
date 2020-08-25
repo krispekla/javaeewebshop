@@ -9,9 +9,9 @@ import com.krispeklaric.javaeewebshop.models.Order;
 import com.krispeklaric.javaeewebshop.models.User;
 import com.krispeklaric.javaeewebshop.services.OrderService;
 import com.krispeklaric.javaeewebshop.services.UserService;
+import com.krispeklaric.javaeewebshop.utils.Constants;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -40,12 +40,12 @@ public class OrderHistoryServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        Boolean isAuthenticated = (Boolean) session.getAttribute("isAuthenticated");
+        Boolean isAuthenticated = (Boolean) session.getAttribute(Constants.IS_AUTHENTICATED);
 
         if (!isAuthenticated) {
 
-            request.setAttribute("status", "401");
-            request.setAttribute("message", "Unauthorized, please login to view your order history!");
+            request.setAttribute(Constants.STATUS, "401");
+            request.setAttribute(Constants.MESSAGE, "Unauthorized, please login to view your order history!");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
@@ -54,34 +54,34 @@ public class OrderHistoryServlet extends HttpServlet {
 
         OrderService orderService = new OrderService();
 
-        if (!session.getAttribute("role").equals("admin")) {
-            List<Order> orders = orderService.getAll((User) session.getAttribute("user"));
-            request.setAttribute("orders", orders);
+        if (!session.getAttribute(Constants.ROLE).equals("admin")) {
+            List<Order> orders = orderService.getAll((User) session.getAttribute(Constants.USER));
+            request.setAttribute(Constants.ORDERS, orders);
 
         } else {
             UserService userService = new UserService();
             List<User> users = userService.getAll();
             List<Order> orders;
 
-            String username = request.getParameter("username");
-            String date = request.getParameter("date");
+            String username = request.getParameter(Constants.PARAM_USERNAME);
+            String date = request.getParameter(Constants.PARAM_DATE);
 
             if (username != null && date != null) {
-                LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(Constants.DATE_FORMAT));
                 User resultUser = userService.get(username);
                 orders = orderService.getAll(resultUser, parsedDate);
             } else if (username != null) {
                 User resultUser = userService.get(username);
                 orders = orderService.getAll(resultUser);
             } else if (date != null) {
-                LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(Constants.DATE_FORMAT));
                 orders = orderService.getAll(parsedDate);
             } else {
                 orders = orderService.getAll();
             }
 
-            request.setAttribute("orders", orders);
-            request.setAttribute("users", users);
+            request.setAttribute(Constants.ORDERS, orders);
+            request.setAttribute(Constants.USERS, users);
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp");
